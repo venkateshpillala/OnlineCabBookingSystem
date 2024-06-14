@@ -1,0 +1,12 @@
+package com.venkatesh.persistence;
+
+public class StudentDaoImple implements IStudentDao {
+
+	@Override
+	public String insert(int id, String name, int age, String address) {
+
+		
+		return null;
+	}
+
+}

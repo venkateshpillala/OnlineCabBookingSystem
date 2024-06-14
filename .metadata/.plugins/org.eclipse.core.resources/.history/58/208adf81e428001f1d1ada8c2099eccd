@@ -1,0 +1,36 @@
+package com.venkatesh.utility;
+
+
+import java.util.*;
+
+import org.hibernate.SessionFactory;
+
+import com.zaxxer.hikari.*;
+import java.io.*;
+
+public class HibernateUtility {
+	
+	private SessionFactory sessionFactory = null;
+	
+	static {
+		try {
+			
+		}
+		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Connection connect() throws IOException, SQLException{
+		
+		String fileLoc = "D:\\Java\\JdbcCrudApp\\src\\main\\java\\com\\venkatesh\\utility\\applications.properties";
+		
+		FileInputStream fis = new FileInputStream(fileLoc);
+		Properties p = new Properties();
+		p.load(fis);
+		
+		Connection con = DriverManager.getConnection(p.getProperty("url"),p.getProperty("username"),p.getProperty("password"));
+		
+		return con;
+	}
+}

@@ -1,0 +1,14 @@
+package com.venkatesh.controller;
+
+import com.venkatesh.persistence.*;
+
+public class Test {
+
+	IStudentDao studentDao = null;
+	public static void main(String args[]) {
+		
+		studentDao = new StudentDaoImple();
+		
+		studentDao.insert(1, "venkatesh", 23, "manthina");
+	}
+}

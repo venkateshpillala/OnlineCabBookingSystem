@@ -1,0 +1,12 @@
+package com.venkatesh.controller;
+
+import com.venkatesh.persistence.*;
+
+public class Test {
+
+	public static void main(String args[]) {
+		
+		IStudentDao studentDao = new StudentDaoImple();
+		
+	}
+}

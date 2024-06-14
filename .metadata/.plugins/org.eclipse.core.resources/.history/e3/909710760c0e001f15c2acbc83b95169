@@ -1,0 +1,40 @@
+package com.venkatesh.controller;
+
+import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.venkatesh.service.*;
+
+@WebServlet("/add")
+public class AddServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;	
+	private IStudentService stService = null;
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		String address = request.getParameter("address");
+		
+		stService = new StudentServiceImple();
+		String result = stService.addStudent(name, Integer.parseInt(age), address);
+		
+		if(result.equals("success")) {
+			RequestDispatcher reqDisp = request.getRequestDispatcher("");
+			reqDisp.forward(request, response);
+			
+		}
+		else{
+			RequestDispatcher reqDisp = request.getRequestDispatcher("/AddForm.html");
+			reqDisp.forward(request, response);
+			
+		}
+	}
+
+}

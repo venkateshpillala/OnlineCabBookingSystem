@@ -1,0 +1,6 @@
+package com.venkatesh.persistence;
+
+public interface IStudentDao {
+
+	String insert();
+}

@@ -1,0 +1,8 @@
+127.0.0.1 - - [24/May/2024:22:10:41 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [24/May/2024:22:10:42 +0530] "GET /OnlineCabBooking/Home.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [24/May/2024:22:10:42 +0530] "GET /favicon.ico HTTP/1.1" 404 762
+0:0:0:0:0:0:0:1 - - [24/May/2024:22:10:47 +0530] "GET /OnlineCabBooking/User.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [24/May/2024:22:11:11 +0530] "GET /OnlineCabBooking/register.html HTTP/1.1" 304 -
+127.0.0.1 - - [24/May/2024:22:21:45 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [24/May/2024:22:21:46 +0530] "GET /CabBooking/Home.html HTTP/1.1" 200 2299
+0:0:0:0:0:0:0:1 - - [24/May/2024:22:21:47 +0530] "GET /favicon.ico HTTP/1.1" 404 762

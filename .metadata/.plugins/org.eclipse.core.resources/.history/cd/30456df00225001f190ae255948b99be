@@ -1,0 +1,33 @@
+package com.cab.controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.cab.service.AdminServiceImple;
+import com.cab.service.IAdminService;
+
+@WebServlet("/changepassword")
+public class AdminPasswordChange extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	RequestDispatcher reqDisp = null;
+	IAdminService adminService = null;
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String old = request.getParameter("old");
+		String newp = request.getParameter("new");
+		String again = request.getParameter("again");
+		
+		adminService = new AdminServiceImple();
+		adminService.getAdminDetails("admin");
+	
+	}
+
+}

@@ -1,0 +1,75 @@
+package com.cab.persistence;
+
+import com.cab.dto.Admin;
+import com.cab.dto.BookedCabs;
+import com.cab.utility.JdbcConnection;
+
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+public class AdminDaoImple implements IAdminDao {
+
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	String query = null;
+	
+	@Override
+	public Admin getAdminDetails(String username) {
+
+		Admin admin = null;
+		
+		query = "SELECT * FROM admin WHERE username = ?";
+		try {
+			con = JdbcConnection.getJdbcConnection();
+			if(con != null) 
+				pstmt = con.prepareStatement(query);
+			if(pstmt != null)
+				pstmt.setString(1,username);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				admin = new Admin();
+				admin.setUsername(rs.getString(1));
+				admin.setPassword(rs.getString(2));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return admin;
+	}
+
+	@Override
+	public List<BookedCabs> allBookings() {
+
+		List<BookedCabs> bookedCabs = null;
+		query = "SELECT * FROM bookedcabs";
+		try {
+			con = JdbcConnection.getJdbcConnection();
+			if(con != null)
+				pstmt = con.prepareStatement(query);
+			if(pstmt != null)
+				rs = pstmt.executeQuery();
+			if(rs != null) {
+				bookedCabs = new ArrayList<BookedCabs>();
+				while(rs.next()) {
+					BookedCabs bc = new BookedCabs(); 
+					bc.setUserName(rs.getString(1));
+					bc.setEmail(rs.getString(2));
+					bc.setDOB(new SimpleDateFormat("yyyy-MM-dd").format(rs.getDate(3)));
+
+				}
+			}
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

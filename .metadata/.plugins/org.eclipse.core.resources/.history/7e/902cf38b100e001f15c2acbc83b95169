@@ -1,0 +1,75 @@
+package com.venkatesh.controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpFilter;
+
+
+@WebFilter(urlPatterns = { "/add" })
+public class AddFilter implements Filter {
+       
+    static {
+    	System.out.println("Filter loaded");
+    }
+    public AddFilter() {
+        super();
+        System.out.println("Filter instantiated");
+    }
+
+	
+    public void init(FilterConfig fConfig) throws ServletException {
+    	System.out.println("Filter initialized");
+    }
+
+	
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		String address = request.getParameter("address");
+		System.out.println(name+" "+age+" "+address);
+		String name_error = "", age_error = "", address_error = "";
+		
+		boolean flag = true;
+		if(name.equals("") || name == null) {
+			flag = false;
+			name_error = "Name required";
+		}
+		if(age.equals("") || age == null) {
+			flag = false;
+			age_error = "Age Required";
+		}
+		if(address.equals("") || address == null) {
+			flag = false;
+			address_error = "Address required";
+		}
+		
+		if(flag) {
+			chain.doFilter(request, response);
+		}
+		else {
+			response.setContentType("text/html");
+			PrintWriter out = response.getWriter();
+			out.println("<form method = 'post' action = './add'>");
+			out.println("<input type = 'text' name = 'name' value = '"+name+"/>");
+			out.println("<input type = 'text' name = 'age' value = '"+age+"/>");
+			out.println("<input type = 'text' name = 'address' value = '"+address+"/>");
+			out.println("<input type = 'submit'  value = 'submit'/>");
+			out.println("</form>");
+		}
+	}
+
+	
+	public void destroy() {
+		System.out.println("Filter destroyed");
+	}
+
+}

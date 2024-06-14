@@ -1,0 +1,47 @@
+package com.venkatesh.persistence;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+
+import com.venkatesh.dto.Student;
+import com.venkatesh.utility.HibernateUtility;
+
+public class StudentDaoImple implements IStudentDao {
+
+	Configuration configuration = null;
+	SessionFactory sessionFactory = null;
+	Session session = null;
+	Transaction transaction = null;
+	
+	@Override
+	public void insert(int id, String name, int age, String address) {
+
+		
+		boolean flag = false;
+		session = HibernateUtility.getSession();
+		if(session != null) {
+			transaction = session.beginTransaction();
+			Student std = new Student();
+			if(std != null) {
+				std.setId(id);
+				std.setName(name);
+				std.setAge(age);
+				std.setAddress(address);
+				
+				session.save(std);
+				flag = true;
+			}
+		}
+		if(flag) {
+			System.out.println("Insertion success");
+			transaction.commit();
+		}
+		else {
+			System.out.println("Not inserted");
+			transaction.rollback();
+		}
+	}
+
+}

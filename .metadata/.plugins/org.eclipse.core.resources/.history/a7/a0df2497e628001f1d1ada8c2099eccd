@@ -1,0 +1,18 @@
+package com.venkatesh.controller;
+
+import com.venkatesh.persistence.IStudentDao;
+
+public class Test implements IStudentDao {
+
+	@Override
+	public void insert(int id, String name, int age, String address) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

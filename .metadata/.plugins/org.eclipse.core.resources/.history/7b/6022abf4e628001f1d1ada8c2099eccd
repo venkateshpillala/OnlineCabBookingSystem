@@ -1,0 +1,33 @@
+package com.venkatesh.utility;
+
+
+import java.util.*;
+
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.venkatesh.dto.Student;
+import com.zaxxer.hikari.*;
+import java.io.*;
+
+public class HibernateUtility {
+	
+	private static SessionFactory sessionFactory = null;
+	
+	static {
+		try {
+			sessionFactory = new  Configuration().configure()
+					.addAnnotatedClass(Student.class).buildSessionFactory();
+		}
+		catch(HibernateException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Session getSession() {
+		Session session = sessionFactory.openSession();		
+		return session;
+	}
+}
